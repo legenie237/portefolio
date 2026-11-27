@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Portfolio de N Samari Malachie, trader et développeur.">
+<title>Portfolio N Samari Malachie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one column, asymmetric section heads on the left, content on the right; sticky top nav */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --fg: #141a22;
+  --muted: #5a6573;
+  --line: #d9dfe6;
+  --accent: #1f5bd6;
+  --accent-soft: #e3ebfb;
+  --ph: #b45309;
+  --up: #12935b;
+  --down: #d1435b;
+  --viz-bg: #f8fafc;
+  --ph-bg: #fff4e0;
+  --display: "Syne", "Avenir Next", system-ui, sans-serif;
+  --body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1319; --surface: #161d26; --fg: #e8edf3; --muted: #9aa6b4; --line: #26303c;
+    --accent: #7aa5ff; --accent-soft: #1a2741; --ph: #f5b453; --ph-bg: #2e2312; --up: #3ccf8e; --down: #ff6b81; --viz-bg: #111820; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1319; --surface: #161d26; --fg: #e8edf3; --muted: #9aa6b4; --line: #26303c;
+  --accent: #7aa5ff; --accent-soft: #1a2741; --ph: #f5b453; --ph-bg: #2e2312; --up: #3ccf8e; --down: #ff6b81; --viz-bg: #111820; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+
+/* placeholder marker */
+.ph { background: var(--ph-bg); color: var(--ph); border-bottom: 1.5px dashed var(--ph); padding: 0 .2em; border-radius: 3px; }
+.notice { display: flex; gap: .6rem; align-items: flex-start; font-size: .9rem; background: var(--ph-bg); color: var(--ph); padding: .7rem 1rem; border-radius: 8px; margin-top: 1rem; }
+
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+nav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: .8rem; flex-wrap: wrap; }
+.logo { font-family: var(--display); font-weight: 800; font-size: 1.1rem; text-decoration: none; color: var(--fg); }
+.logo span { color: var(--accent); }
+nav ul { list-style: none; display: flex; gap: 1.2rem; margin: 0; padding: 0; flex-wrap: wrap; }
+nav ul a { color: var(--muted); text-decoration: none; font-size: .92rem; font-weight: 500; }
+nav ul a:hover { color: var(--fg); }
+
+.hero .wrap { padding-block: 4.5rem 3.5rem; display: grid; grid-template-columns: 1.6fr 1fr; gap: 3rem; align-items: center; }
+.eyebrow { font-family: var(--mono); font-size: .78rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); line-height: 1.02; font-weight: 800; margin-block: .6rem 1.2rem; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 52ch; margin: 0; }
+.cta { display: flex; gap: .8rem; margin-top: 1.8rem; flex-wrap: wrap; }
+.btn { display: inline-block; padding: .75rem 1.2rem; border-radius: 999px; font-weight: 600; text-decoration: none; font-size: .95rem; border: 1.5px solid var(--accent); }
+.btn.primary { background: var(--accent); color: var(--bg); }
+.btn.ghost { color: var(--accent); }
+.avatar { aspect-ratio: 1; max-width: 100%; width: 300px; justify-self: end; border-radius: 24px; background: var(--accent-soft); display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 5rem; color: var(--accent); position: relative; overflow: hidden; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.avatar small { position: absolute; bottom: .8rem; font-family: var(--mono); font-size: .7rem; font-weight: 400; color: var(--ph); }
+
+section.block { border-top: 1px solid var(--line); }
+section.block .wrap { display: grid; grid-template-columns: 220px 1fr; gap: 2.5rem; padding-block: 3.5rem; }
+.block-head h2 { font-size: 1.6rem; font-weight: 700; }
+.block-head .eyebrow { display: block; margin-bottom: .4rem; }
+.block-body { min-width: 0; }
+.block-body p { max-width: 65ch; margin: 0 0 1rem; }
+
+.skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.skills h3 { font-family: var(--mono); font-size: .8rem; font-weight: 500; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: .7rem; }
+.chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+.chip { font-size: .88rem; padding: .3rem .7rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); }
+
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; display: flex; flex-direction: column; gap: .7rem; min-width: 0; }
+.project .thumb { aspect-ratio: 16/9; max-width: 100%; border-radius: 10px; overflow: hidden; position: relative; border: 1px solid var(--line); background: var(--viz-bg); }
+.viz { display: block; width: 100%; height: 100%; }
+.viz .vt { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; fill: var(--muted); }
+.thumb .badge { position: absolute; top: 10px; left: 10px; font-family: var(--mono); font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; padding: .2rem .55rem; border-radius: 999px; background: var(--surface); color: var(--fg); border: 1px solid var(--line); }
+.project h3 { font-size: 1.2rem; }
+.project p { margin: 0; color: var(--muted); font-size: .95rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: auto; }
+.tag { font-family: var(--mono); font-size: .72rem; padding: .15rem .5rem; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.4rem; }
+.timeline li { display: grid; grid-template-columns: 130px 1fr; gap: 1rem; }
+.timeline .when { font-family: var(--mono); font-size: .82rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: .15rem; }
+.timeline h3 { font-family: var(--body); font-size: 1.02rem; font-weight: 700; }
+.timeline p { margin: .2rem 0 0; color: var(--muted); font-size: .95rem; }
+
+.contact-list { display: grid; gap: .8rem; }
+.contact-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: .8rem 1rem; }
+.contact-row .label { font-family: var(--mono); font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); min-width: 90px; }
+.contact-row .val { flex: 1; min-width: 0; overflow-wrap: anywhere; user-select: all; }
+.copy { font: inherit; font-size: .82rem; padding: .35rem .8rem; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+.copy:hover { border-color: var(--accent); color: var(--accent); }
+
+footer .wrap { padding-block: 2rem; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+@media (max-width: 800px) {
+  .hero .wrap { grid-template-columns: 1fr; padding-block: 3rem 2.5rem; gap: 2rem; }
+  .avatar { justify-self: start; width: 180px; font-size: 3rem; }
+  section.block .wrap { grid-template-columns: 1fr; gap: 1.2rem; padding-block: 2.5rem; }
+  .skills, .projects { grid-template-columns: 1fr; }
+  .timeline li { grid-template-columns: 1fr; gap: .2rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .chip, .project { transition: transform .15s ease, border-color .15s ease; }
+  .project:hover { transform: translateY(-2px); border-color: var(--accent); }
+}
+</style>
+<style>html{scroll-behavior:smooth} body{margin:0} img{max-width:100%}</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top">N Samari Malachie<span>.</span></a>
+    <ul>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Portfolio · Cameroun</span>
+      <h1>Bonjour, je suis N Samari Malachie.<br><em>Trader et développeur.</em></h1>
+      <p class="lead">J'analyse les marchés financiers et je construis les outils qui vont avec : indicateurs, robots de trading et tableaux de bord pour décider plus vite et avec plus de discipline.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projets">Voir mes projets</a>
+        <a class="btn ghost" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="avatar"><img src="photo.jpg" alt="Photo de N Samari Malachie" width="640" height="640"></div>
+  </div>
+</header>
+
+<section class="block" id="apropos">
+  <div class="wrap">
+    <div class="block-head"><span class="eyebrow">Qui je suis</span><h2>À propos</h2></div>
+    <div class="block-body">
+      <p>Je suis à la fois trader et développeur. Le trading m'a appris la lecture des graphiques, la patience et surtout la gestion du risque. Le développement me permet de transformer mes idées de stratégie en outils concrets, testables et automatisés.</p>
+      <p>Je cherche aujourd'hui des collaborations et des missions où ces deux mondes se rencontrent : création d'outils de trading, automatisation de stratégies, applications web et accompagnement de traders qui veulent structurer leur méthode.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="competences">
+  <div class="wrap">
+    <div class="block-head"><span class="eyebrow">Ce que je sais faire</span><h2>Compétences</h2></div>
+    <div class="block-body skills">
+      <div>
+        <h3>Trading</h3>
+        <div class="chips"><span class="chip">Analyse technique</span><span class="chip">Price action</span><span class="chip">Gestion du risque</span><span class="chip">Forex</span><span class="chip">Crypto</span><span class="chip">Backtesting</span></div>
+      </div>
+      <div>
+        <h3>Développement</h3>
+        <div class="chips"><span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">MQL5</span><span class="chip">HTML / CSS</span><span class="chip">API</span></div>
+      </div>
+      <div>
+        <h3>Outils</h3>
+        <div class="chips"><span class="chip">MetaTrader 5</span><span class="chip">TradingView</span><span class="chip">Git / GitHub</span><span class="chip">VS Code</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="projets">
+  <div class="wrap">
+    <div class="block-head"><span class="eyebrow">Réalisations</span><h2>Projets</h2></div>
+    <div class="block-body projects">
+      <article class="project">
+        <div class="thumb"><svg class="viz" viewBox="0 0 320 180" role="img" aria-label="Illustration : bougies en tendance haussière avec moyenne mobile et signal d'achat automatique"><rect width="320" height="180" fill="var(--viz-bg)"/><line x1="0" x2="320" y1="45" y2="45" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="90" y2="90" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="135" y2="135" stroke="var(--line)" stroke-width="1"/><line x1="21.5" y1="139.0" x2="21.5" y2="149.9" stroke="var(--down)" stroke-width="1.2"/><rect x="18.0" y="143.7" width="7.1" height="2.3" rx="1" fill="var(--down)"/><line x1="32.6" y1="134.9" x2="32.6" y2="148.5" stroke="var(--up)" stroke-width="1.2"/><rect x="29.1" y="140.0" width="7.1" height="6.0" rx="1" fill="var(--up)"/><line x1="43.7" y1="134.0" x2="43.7" y2="150.8" stroke="var(--down)" stroke-width="1.2"/><rect x="40.1" y="140.0" width="7.1" height="7.4" rx="1" fill="var(--down)"/><line x1="54.8" y1="140.6" x2="54.8" y2="154.2" stroke="var(--down)" stroke-width="1.2"/><rect x="51.2" y="147.4" width="7.1" height="2.4" rx="1" fill="var(--down)"/><line x1="65.8" y1="134.2" x2="65.8" y2="155.0" stroke="var(--up)" stroke-width="1.2"/><rect x="62.3" y="138.6" width="7.1" height="11.2" rx="1" fill="var(--up)"/><line x1="76.9" y1="133.4" x2="76.9" y2="149.0" stroke="var(--down)" stroke-width="1.2"/><rect x="73.4" y="138.6" width="7.1" height="4.3" rx="1" fill="var(--down)"/><line x1="88.0" y1="133.1" x2="88.0" y2="148.2" stroke="var(--up)" stroke-width="1.2"/><rect x="84.5" y="138.7" width="7.1" height="4.1" rx="1" fill="var(--up)"/><line x1="99.1" y1="133.0" x2="99.1" y2="149.9" stroke="var(--down)" stroke-width="1.2"/><rect x="95.5" y="138.7" width="7.1" height="6.2" rx="1" fill="var(--down)"/><line x1="110.2" y1="142.6" x2="110.2" y2="152.0" stroke="var(--down)" stroke-width="1.2"/><rect x="106.6" y="145.0" width="7.1" height="1.5" rx="1" fill="var(--down)"/><line x1="121.2" y1="137.3" x2="121.2" y2="152.1" stroke="var(--up)" stroke-width="1.2"/><rect x="117.7" y="142.8" width="7.1" height="3.0" rx="1" fill="var(--up)"/><line x1="132.3" y1="127.9" x2="132.3" y2="146.9" stroke="var(--up)" stroke-width="1.2"/><rect x="128.8" y="134.4" width="7.1" height="8.5" rx="1" fill="var(--up)"/><line x1="143.4" y1="119.7" x2="143.4" y2="140.9" stroke="var(--up)" stroke-width="1.2"/><rect x="139.8" y="123.9" width="7.1" height="10.4" rx="1" fill="var(--up)"/><line x1="154.5" y1="109.1" x2="154.5" y2="126.8" stroke="var(--up)" stroke-width="1.2"/><rect x="150.9" y="111.8" width="7.1" height="12.2" rx="1" fill="var(--up)"/><line x1="165.5" y1="105.1" x2="165.5" y2="118.8" stroke="var(--down)" stroke-width="1.2"/><rect x="162.0" y="111.8" width="7.1" height="2.8" rx="1" fill="var(--down)"/><line x1="176.6" y1="104.4" x2="176.6" y2="119.1" stroke="var(--up)" stroke-width="1.2"/><rect x="173.1" y="108.1" width="7.1" height="6.5" rx="1" fill="var(--up)"/><line x1="187.7" y1="103.2" x2="187.7" y2="113.0" stroke="var(--up)" stroke-width="1.2"/><rect x="184.1" y="107.0" width="7.1" height="1.5" rx="1" fill="var(--up)"/><line x1="198.8" y1="95.1" x2="198.8" y2="112.4" stroke="var(--up)" stroke-width="1.2"/><rect x="195.2" y="101.5" width="7.1" height="5.5" rx="1" fill="var(--up)"/><line x1="209.8" y1="82.0" x2="209.8" y2="108.2" stroke="var(--up)" stroke-width="1.2"/><rect x="206.3" y="88.2" width="7.1" height="13.3" rx="1" fill="var(--up)"/><line x1="220.9" y1="77.7" x2="220.9" y2="94.3" stroke="var(--up)" stroke-width="1.2"/><rect x="217.4" y="80.7" width="7.1" height="7.5" rx="1" fill="var(--up)"/><line x1="232.0" y1="60.2" x2="232.0" y2="85.5" stroke="var(--up)" stroke-width="1.2"/><rect x="228.5" y="66.6" width="7.1" height="14.1" rx="1" fill="var(--up)"/><line x1="243.1" y1="54.9" x2="243.1" y2="72.6" stroke="var(--up)" stroke-width="1.2"/><rect x="239.5" y="58.1" width="7.1" height="8.5" rx="1" fill="var(--up)"/><line x1="254.2" y1="49.3" x2="254.2" y2="60.7" stroke="var(--up)" stroke-width="1.2"/><rect x="250.6" y="52.8" width="7.1" height="5.3" rx="1" fill="var(--up)"/><line x1="265.2" y1="34.5" x2="265.2" y2="55.5" stroke="var(--up)" stroke-width="1.2"/><rect x="261.7" y="41.2" width="7.1" height="11.6" rx="1" fill="var(--up)"/><line x1="276.3" y1="26.7" x2="276.3" y2="44.1" stroke="var(--up)" stroke-width="1.2"/><rect x="272.8" y="30.8" width="7.1" height="10.4" rx="1" fill="var(--up)"/><line x1="287.4" y1="25.0" x2="287.4" y2="38.0" stroke="var(--down)" stroke-width="1.2"/><rect x="283.8" y="30.8" width="7.1" height="1.5" rx="1" fill="var(--down)"/><line x1="298.5" y1="26.8" x2="298.5" y2="41.0" stroke="var(--down)" stroke-width="1.2"/><rect x="294.9" y="31.8" width="7.1" height="6.7" rx="1" fill="var(--down)"/><path d="M21.5 146.0 L32.6 143.0 L43.7 144.5 L54.8 145.8 L65.8 144.4 L76.9 143.7 L88.0 143.5 L99.1 143.0 L110.2 142.2 L121.2 143.0 L132.3 141.3 L143.4 138.4 L154.5 131.7 L165.5 125.5 L176.6 118.5 L187.7 113.1 L198.8 108.6 L209.8 103.9 L220.9 97.1 L232.0 88.8 L243.1 79.0 L254.2 69.3 L265.2 59.9 L276.3 49.9 L287.4 42.9 L298.5 39.0" fill="none" stroke="var(--accent)" stroke-width="2"/><g transform="translate(76.9,165.7)"><path d="M0 -8 L6 2 L-6 2 Z" fill="var(--accent)"/></g><text x="85.9" y="169.7" class="vt">BUY</text><rect x="246" y="12" width="62" height="20" rx="10" fill="var(--accent)"/><circle cx="258" cy="22" r="3.5" fill="var(--viz-bg)"><animate attributeName="opacity" values="1;.3;1" dur="1.6s" repeatCount="indefinite"/></circle><text x="266" y="26" class="vt" fill="var(--viz-bg)" style="fill:var(--viz-bg)">AUTO</text></svg></div>
+        <h3>Robot de trading automatisé</h3>
+        <p>Un robot qui applique une stratégie de suivi de tendance avec stop loss et taille de position calculés automatiquement selon le risque choisi.</p>
+        <div class="tags"><span class="tag">MQL5</span><span class="tag">MetaTrader 5</span></div>
+      </article>
+      <article class="project">
+        <div class="thumb"><svg class="viz" viewBox="0 0 320 180" role="img" aria-label="Illustration : graphique en range avec zones de support et de résistance"><rect width="320" height="180" fill="var(--viz-bg)"/><line x1="0" x2="320" y1="45" y2="45" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="90" y2="90" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="135" y2="135" stroke="var(--line)" stroke-width="1"/><rect x="0" y="36.6" width="320" height="22.1" fill="var(--down)" opacity=".16"/><rect x="0" y="121.7" width="320" height="22.1" fill="var(--up)" opacity=".16"/><text x="312" text-anchor="end" y="32.6" class="vt" style="fill:var(--down)">RÉSISTANCE</text><text x="8" y="155.8" class="vt" style="fill:var(--up)">SUPPORT</text><line x1="21.1" y1="77.7" x2="21.1" y2="100.9" stroke="var(--up)" stroke-width="1.2"/><rect x="17.9" y="87.9" width="6.6" height="2.3" rx="1" fill="var(--up)"/><line x1="31.4" y1="58.1" x2="31.4" y2="99.7" stroke="var(--up)" stroke-width="1.2"/><rect x="28.1" y="68.3" width="6.6" height="19.6" rx="1" fill="var(--up)"/><line x1="41.7" y1="60.7" x2="41.7" y2="85.4" stroke="var(--down)" stroke-width="1.2"/><rect x="38.4" y="68.3" width="6.6" height="5.0" rx="1" fill="var(--down)"/><line x1="52.0" y1="40.1" x2="52.0" y2="77.5" stroke="var(--up)" stroke-width="1.2"/><rect x="48.7" y="51.8" width="6.6" height="21.5" rx="1" fill="var(--up)"/><line x1="62.3" y1="43.4" x2="62.3" y2="60.1" stroke="var(--up)" stroke-width="1.2"/><rect x="59.0" y="48.9" width="6.6" height="2.9" rx="1" fill="var(--up)"/><line x1="72.6" y1="41.4" x2="72.6" y2="54.1" stroke="var(--up)" stroke-width="1.2"/><rect x="69.3" y="44.7" width="6.6" height="4.2" rx="1" fill="var(--up)"/><line x1="82.9" y1="32.8" x2="82.9" y2="62.7" stroke="var(--down)" stroke-width="1.2"/><rect x="79.6" y="44.7" width="6.6" height="7.6" rx="1" fill="var(--down)"/><line x1="93.1" y1="41.6" x2="93.1" y2="65.1" stroke="var(--down)" stroke-width="1.2"/><rect x="89.9" y="52.3" width="6.6" height="8.4" rx="1" fill="var(--down)"/><line x1="103.4" y1="56.3" x2="103.4" y2="64.7" stroke="var(--down)" stroke-width="1.2"/><rect x="100.1" y="60.6" width="6.6" height="1.5" rx="1" fill="var(--down)"/><line x1="113.7" y1="56.4" x2="113.7" y2="74.1" stroke="var(--down)" stroke-width="1.2"/><rect x="110.4" y="61.6" width="6.6" height="7.3" rx="1" fill="var(--down)"/><line x1="124.0" y1="57.5" x2="124.0" y2="86.2" stroke="var(--down)" stroke-width="1.2"/><rect x="120.7" y="68.9" width="6.6" height="11.4" rx="1" fill="var(--down)"/><line x1="134.3" y1="72.1" x2="134.3" y2="103.9" stroke="var(--down)" stroke-width="1.2"/><rect x="131.0" y="80.3" width="6.6" height="14.0" rx="1" fill="var(--down)"/><line x1="144.6" y1="82.3" x2="144.6" y2="130.7" stroke="var(--down)" stroke-width="1.2"/><rect x="141.3" y="94.3" width="6.6" height="26.7" rx="1" fill="var(--down)"/><line x1="154.9" y1="104.9" x2="154.9" y2="127.0" stroke="var(--up)" stroke-width="1.2"/><rect x="151.6" y="116.5" width="6.6" height="4.5" rx="1" fill="var(--up)"/><line x1="165.1" y1="111.8" x2="165.1" y2="139.0" stroke="var(--down)" stroke-width="1.2"/><rect x="161.9" y="116.5" width="6.6" height="18.0" rx="1" fill="var(--down)"/><line x1="175.4" y1="128.5" x2="175.4" y2="151.4" stroke="var(--down)" stroke-width="1.2"/><rect x="172.1" y="134.5" width="6.6" height="8.1" rx="1" fill="var(--down)"/><line x1="185.7" y1="132.3" x2="185.7" y2="148.9" stroke="var(--up)" stroke-width="1.2"/><rect x="182.4" y="141.9" width="6.6" height="1.5" rx="1" fill="var(--up)"/><line x1="196.0" y1="119.3" x2="196.0" y2="149.6" stroke="var(--up)" stroke-width="1.2"/><rect x="192.7" y="130.2" width="6.6" height="11.7" rx="1" fill="var(--up)"/><line x1="206.3" y1="113.0" x2="206.3" y2="140.0" stroke="var(--up)" stroke-width="1.2"/><rect x="203.0" y="120.7" width="6.6" height="9.5" rx="1" fill="var(--up)"/><line x1="216.6" y1="101.2" x2="216.6" y2="124.0" stroke="var(--up)" stroke-width="1.2"/><rect x="213.3" y="113.5" width="6.6" height="7.1" rx="1" fill="var(--up)"/><line x1="226.9" y1="75.8" x2="226.9" y2="116.8" stroke="var(--up)" stroke-width="1.2"/><rect x="223.6" y="86.9" width="6.6" height="26.6" rx="1" fill="var(--up)"/><line x1="237.1" y1="66.0" x2="237.1" y2="95.6" stroke="var(--up)" stroke-width="1.2"/><rect x="233.9" y="72.6" width="6.6" height="14.3" rx="1" fill="var(--up)"/><line x1="247.4" y1="69.0" x2="247.4" y2="79.7" stroke="var(--down)" stroke-width="1.2"/><rect x="244.1" y="72.6" width="6.6" height="2.3" rx="1" fill="var(--down)"/><line x1="257.7" y1="41.9" x2="257.7" y2="85.2" stroke="var(--up)" stroke-width="1.2"/><rect x="254.4" y="46.9" width="6.6" height="28.0" rx="1" fill="var(--up)"/><line x1="268.0" y1="28.6" x2="268.0" y2="53.3" stroke="var(--up)" stroke-width="1.2"/><rect x="264.7" y="40.7" width="6.6" height="6.2" rx="1" fill="var(--up)"/><line x1="278.3" y1="32.6" x2="278.3" y2="59.3" stroke="var(--down)" stroke-width="1.2"/><rect x="275.0" y="40.7" width="6.6" height="8.2" rx="1" fill="var(--down)"/><line x1="288.6" y1="38.6" x2="288.6" y2="65.8" stroke="var(--down)" stroke-width="1.2"/><rect x="285.3" y="48.8" width="6.6" height="6.2" rx="1" fill="var(--down)"/><line x1="298.9" y1="43.1" x2="298.9" y2="67.2" stroke="var(--up)" stroke-width="1.2"/><rect x="295.6" y="46.6" width="6.6" height="8.5" rx="1" fill="var(--up)"/></svg></div>
+        <h3>Indicateur de zones clés</h3>
+        <p>Un indicateur qui repère et affiche les zones de support et de résistance pour gagner du temps dans l'analyse des graphiques.</p>
+        <div class="tags"><span class="tag">Pine Script</span><span class="tag">TradingView</span></div>
+      </article>
+      <article class="project">
+        <div class="thumb"><svg class="viz" viewBox="0 0 320 180" role="img" aria-label="Illustration : liste de trades gagnants et perdants"><rect width="320" height="180" fill="var(--viz-bg)"/><line x1="0" x2="320" y1="45" y2="45" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="90" y2="90" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="135" y2="135" stroke="var(--line)" stroke-width="1"/><rect x="16" y="18" width="288" height="22" rx="5" fill="var(--surface)" stroke="var(--line)"/><circle cx="30" cy="29" r="4" fill="var(--up)"/><text x="42" y="33" class="vt" style="fill:var(--fg)">EUR/USD</text><rect x="130" y="26" width="55" height="6" rx="3" fill="var(--line)"/><path d="M280 32 l6 -6 l6 6" fill="none" stroke="var(--up)" stroke-width="2"/><rect x="16" y="46" width="288" height="22" rx="5" fill="var(--surface)" stroke="var(--line)"/><circle cx="30" cy="57" r="4" fill="var(--down)"/><text x="42" y="61" class="vt" style="fill:var(--fg)">BTC/USD</text><rect x="130" y="54" width="63" height="6" rx="3" fill="var(--line)"/><path d="M280 54 l6 6 l6 -6" fill="none" stroke="var(--down)" stroke-width="2"/><rect x="16" y="74" width="288" height="22" rx="5" fill="var(--surface)" stroke="var(--line)"/><circle cx="30" cy="85" r="4" fill="var(--up)"/><text x="42" y="89" class="vt" style="fill:var(--fg)">GBP/JPY</text><rect x="130" y="82" width="71" height="6" rx="3" fill="var(--line)"/><path d="M280 88 l6 -6 l6 6" fill="none" stroke="var(--up)" stroke-width="2"/><rect x="16" y="102" width="288" height="22" rx="5" fill="var(--surface)" stroke="var(--line)"/><circle cx="30" cy="113" r="4" fill="var(--up)"/><text x="42" y="117" class="vt" style="fill:var(--fg)">XAU/USD</text><rect x="130" y="110" width="82" height="6" rx="3" fill="var(--line)"/><path d="M280 116 l6 -6 l6 6" fill="none" stroke="var(--up)" stroke-width="2"/><rect x="16" y="130" width="288" height="22" rx="5" fill="var(--surface)" stroke="var(--line)"/><circle cx="30" cy="141" r="4" fill="var(--down)"/><text x="42" y="145" class="vt" style="fill:var(--fg)">USD/CAD</text><rect x="130" y="138" width="89" height="6" rx="3" fill="var(--line)"/><path d="M280 138 l6 6 l6 -6" fill="none" stroke="var(--down)" stroke-width="2"/></svg></div>
+        <h3>Journal de trading</h3>
+        <p>Une application pour noter chaque trade, suivre ses statistiques et repérer ses erreurs récurrentes afin de progresser semaine après semaine.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Web</span></div>
+      </article>
+      <article class="project">
+        <div class="thumb"><svg class="viz" viewBox="0 0 320 180" role="img" aria-label="Illustration : courbe de capital d'un backtest"><rect width="320" height="180" fill="var(--viz-bg)"/><line x1="0" x2="320" y1="45" y2="45" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="90" y2="90" stroke="var(--line)" stroke-width="1"/><line x1="0" x2="320" y1="135" y2="135" stroke="var(--line)" stroke-width="1"/><defs><linearGradient id="eq" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".35"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs><path d="M16.0 150.4 L20.9 145.6 L25.8 141.6 L30.6 140.0 L35.5 142.5 L40.4 136.1 L45.3 129.5 L50.2 127.4 L55.1 125.4 L59.9 127.5 L64.8 133.2 L69.7 133.2 L74.6 130.0 L79.5 134.7 L84.3 128.3 L89.2 130.5 L94.1 132.7 L99.0 137.7 L103.9 128.2 L108.7 122.6 L113.6 115.0 L118.5 111.3 L123.4 116.5 L128.3 117.2 L133.2 115.4 L138.0 119.3 L142.9 110.5 L147.8 110.6 L152.7 114.0 L157.6 107.2 L162.4 111.0 L167.3 102.6 L172.2 101.4 L177.1 98.6 L182.0 99.1 L186.8 97.5 L191.7 100.3 L196.6 105.5 L201.5 98.0 L206.4 100.1 L211.3 93.9 L216.1 96.5 L221.0 87.4 L225.9 79.5 L230.8 73.6 L235.7 67.7 L240.5 64.6 L245.4 59.1 L250.3 63.0 L255.2 61.4 L260.1 54.5 L264.9 57.2 L269.8 48.8 L274.7 40.9 L279.6 40.4 L284.5 40.6 L289.4 39.4 L294.2 39.2 L299.1 29.7 L304.0 29.6 L304.0 160 L16.0 160 Z" fill="url(#eq)"/><path d="M16.0 150.4 L20.9 145.6 L25.8 141.6 L30.6 140.0 L35.5 142.5 L40.4 136.1 L45.3 129.5 L50.2 127.4 L55.1 125.4 L59.9 127.5 L64.8 133.2 L69.7 133.2 L74.6 130.0 L79.5 134.7 L84.3 128.3 L89.2 130.5 L94.1 132.7 L99.0 137.7 L103.9 128.2 L108.7 122.6 L113.6 115.0 L118.5 111.3 L123.4 116.5 L128.3 117.2 L133.2 115.4 L138.0 119.3 L142.9 110.5 L147.8 110.6 L152.7 114.0 L157.6 107.2 L162.4 111.0 L167.3 102.6 L172.2 101.4 L177.1 98.6 L182.0 99.1 L186.8 97.5 L191.7 100.3 L196.6 105.5 L201.5 98.0 L206.4 100.1 L211.3 93.9 L216.1 96.5 L221.0 87.4 L225.9 79.5 L230.8 73.6 L235.7 67.7 L240.5 64.6 L245.4 59.1 L250.3 63.0 L255.2 61.4 L260.1 54.5 L264.9 57.2 L269.8 48.8 L274.7 40.9 L279.6 40.4 L284.5 40.6 L289.4 39.4 L294.2 39.2 L299.1 29.7 L304.0 29.6" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="304.0" cy="29.6" r="4" fill="var(--accent)"/><text x="16" y="174" class="vt">HISTORIQUE</text><text x="304" y="174" class="vt" text-anchor="end">AUJOURD'HUI</text></svg></div>
+        <h3>Outil de backtest</h3>
+        <p>Un script qui teste une stratégie sur des données historiques et résume ses résultats avant de risquer de l'argent réel.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">Données</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="parcours">
+  <div class="wrap">
+    <div class="block-head"><span class="eyebrow">Ma démarche</span><h2>Parcours</h2></div>
+    <div class="block-body">
+      <ol class="timeline">
+        <li><span class="when">Aujourd'hui</span><div><h3>Trader et développeur indépendant</h3><p>Trading sur les marchés et création d'outils sur mesure pour moi et pour d'autres traders.</p></div></li>
+        <li><span class="when">Ensuite</span><div><h3>Automatisation</h3><p>Passage de l'analyse manuelle aux robots, indicateurs et outils de backtest.</p></div></li>
+        <li><span class="when">Au début</span><div><h3>Découverte des marchés et du code</h3><p>Apprentissage de l'analyse technique, de la gestion du risque et des bases de la programmation.</p></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact">
+  <div class="wrap">
+    <div class="block-head"><span class="eyebrow">Travaillons ensemble</span><h2>Contact</h2></div>
+    <div class="block-body">
+      <p>Un projet d'outil de trading, une mission de développement ou une question ? Appelle-moi ou écris-moi, je réponds rapidement.</p>
+      <div class="contact-list">
+        <div class="contact-row"><span class="label">Téléphone</span><span class="val" id="c-tel">+237 6 59 70 33 38</span><button class="copy" type="button" data-target="c-tel">Copier</button></div>
+        <div class="contact-row"><span class="label">GitHub</span><span class="val"><a href="https://github.com/legenie237" target="_blank" rel="noopener">github.com/legenie237</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© 2026 N Samari Malachie</span><span>Fait avec soin</span></div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var el = document.getElementById(b.dataset.target);
+    var text = el.textContent.trim();
+    var done = function () { b.textContent = 'Copié'; setTimeout(function () { b.textContent = 'Copier'; }, 1500); };
+    var fallback = function () { var r = document.createRange(); r.selectNodeContents(el); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+});
+</script>
+
+</body>
+</html>
